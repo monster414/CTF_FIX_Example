@@ -1,65 +1,40 @@
-# 基础镜像 WEB Httpd Mariadb PHP 7.4
+# What is this?
 
-- L: Linux
-- A: Apache Httpd
-- M: MySQL - Mariadb
-- P: PHP 7.4
-- PHP MySQL Ext
-    + mysql
-    + mysqli
+漏洞修复在线评测样例靶机
 
-## Example
-
-TODO:
-
-## Usage
-
-### Conf
-
-- apache /etc/apache2/
-- php /usr/local/etc/php/php.ini
-
-### ENV
-
-- FLAG=ctfhub{httpd_mysql_php_74}
-
-You should rewrite flag.sh when you use this image.
-The `$FLAG` is not mandatory, but i hope you use it!
-
-### Files
-
-- src 网站源码
-    + db.sql **This file should be use in Dockerfile**
-    + index.php
-    + ...etc
-- Dockerfile
-- docker-compose.yml
-
-#### db.sql
-
-You should create database and user!
-
-```sql
-DROP DATABASE IF EXISTS `ctfhub`;
-CREATE DATABASE ctfhub;
-GRANT SELECT,INSERT,UPDATE,DELETE on ctfhub.* to ctfhub@'127.0.0.1' identified by 'ctfhub';
-GRANT SELECT,INSERT,UPDATE,DELETE on ctfhub.* to ctfhub@localhost identified by 'ctfhub';
-use ctfhub;
-
--- create table...
-```
-
-### Dockerfile
+# How to use?
 
 ```
-FROM ctfhub/base_web_httpd_mysql_php_74
+git clone https://github.com/monster414/CTF_FIX_Example
+cd CTF_FIX_Example
+docker build . -t "CTF_FIX_Example"
+```
+在CTFd中使用该镜像即可（需要CTFd Whale）
 
-COPY src /var/www/html
-COPY _files/flag.sh /flag.sh
+# Decription about challenge
 
-RUN sh -c 'mysqld_safe &' \
-    && sleep 5s \
-    && mysql -uroot -proot -e "source /var/www/html/db.sql" \
-    && rm -f /var/www/html/db.sql
+```
+FIX /var/www/html/index.php
+{"SSH_Account" : "ctf:123456"}
+/check to check
+/check.py is payloads and expected response
+/flag is flag
+```
+具体机制看一眼`/check.py`就行
+
+# Solve
+
+```php
+<?php
+	if((preg_match("/[\x{00}-\x{1f}a-zA-Z\x{7b}-\x{ff}]/", $_GET["exp"])) === 0)
+	{
+		$sum = eval("return ".$_GET["exp"].";");
+		echo $sum;
+	}
+?>
 ```
 
+# Docker制作参考(魔改)
+
+https://github.com/CTFTraining/qwb_2019_supersqli
+https://github.com/ctfhub-team/base_web_httpd_mysql_php_74

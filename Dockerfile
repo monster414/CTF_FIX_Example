@@ -1,7 +1,5 @@
 FROM php:7.4-apache
 
-LABEL Organization="CTFHUB" Author="Virink <virink@outlook.com>"
-
 ENV TZ=Asia/Shanghai
 
 COPY _files/ /tmp/
