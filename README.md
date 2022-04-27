@@ -10,6 +10,7 @@ cd CTF_FIX_Example
 docker build . -t "CTF_FIX_Example"
 ```
 在CTFd中使用该镜像即可（需要CTFd Whale）
+
 Frp Redirect Port:22
 
 # Decription about challenge
@@ -21,7 +22,7 @@ FIX /var/www/html/index.php
 /check.py is payloads and expected response
 /flag is flag
 ```
-具体机制看一眼`/check.py`就行
+具体机制看一眼`check.py`就行
 
 # Solve
 
@@ -38,4 +39,5 @@ FIX /var/www/html/index.php
 # Docker制作参考(魔改)
 
 https://github.com/CTFTraining/qwb_2019_supersqli
+
 https://github.com/ctfhub-team/base_web_httpd_mysql_php_74
