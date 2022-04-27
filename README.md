@@ -11,9 +11,9 @@ docker build . -t "CTF_FIX_Example"
 ```
 在CTFd中使用该镜像即可（需要CTFd Whale）
 
-Frp Redirect Port:22
+**Frp Redirect Port:22**
 
-# Decription about challenge
+# Description about challenge
 
 ```
 FIX /var/www/html/index.php
