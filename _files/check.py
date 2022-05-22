@@ -31,5 +31,5 @@ for _ in range(len(attack_req)):
 		exit()
 
 os.setuid(0)
-flag = open("./flag", "r").read()
+flag = open("/flag", "r").read()
 print(flag)

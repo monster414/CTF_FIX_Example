@@ -11,6 +11,7 @@ echo $FLAG > /flag
 mv /tmp/check /check
 mv /tmp/check.py /check.py
 mv /tmp/index.php /var/www/html/index.php
+chmod +x 777 /var/www/html/index.php
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 chmod +s /check /check.py
 chmod 400 /flag
